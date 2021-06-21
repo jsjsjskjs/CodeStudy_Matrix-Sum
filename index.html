@@ -1,0 +1,82 @@
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+        function solution(arr){  
+            //최대값을 바로바로 갱신해주면서 구해보자
+            let max = 0
+            let sum1=sum2=0
+            
+            for(let n=0; n<arr.length; n++) {
+              sum1=sum2=0
+              for(let i=0; i<arr.length; i++){
+                sum1 += arr[n][i]
+                sum2 += arr[i][n]
+              }
+              max = Math.max(max, sum1, sum2)
+            }
+  
+            sum1=sum2=0
+  
+            for(let n=0; n<arr.length; n++) {
+              sum1 += arr[n][n]
+              sum2 += arr[n][(arr.length-1)-n]
+            }
+            return Math.max(max, sum1, sum2) 
+        }
+  
+        let arr=[[10, 13, 10, 12, 15], 
+                 [12, 39, 30, 23, 11],
+                 [11, 25, 50, 53, 15],
+                 [19, 27, 29, 37, 27],
+                 [19, 13, 30, 13, 19]];
+        console.log(solution(arr));
+
+        /* another solution
+        
+        function solution(arr) {
+        let horizontal = arr.map(function (el) {
+          return el.reduce((el1, el2) => el1 + el2);
+        });
+        let vertical = [];
+        let diagonal1 = [];
+        let diagonal2 = [];
+
+        for (let n = 0; n < arr.length; n++) {
+          let newArr = [];
+          diagonal1.push(arr[n][n]);
+          diagonal2.push(arr[n][arr.length - 1 - n]);
+          for (let i = 0; i < arr.length; i++) {
+            newArr.push(arr[i][n]);
+          }
+          let sum = newArr.reduce((el1, el2) => el1 + el2);
+          vertical.push(sum);
+        }
+        let diagonal1SUM = diagonal1.reduce((el1, el2) => el1 + el2);
+        let diagonal2SUM = diagonal2.reduce((el1, el2) => el1 + el2);
+
+        let diagonal = [diagonal1SUM, diagonal2SUM];
+
+        const result = [...horizontal, ...vertical, ...diagonal];
+
+        return Math.max(...result);
+      }
+
+      let arr = [
+        [10, 13, 10, 12, 15],
+        [12, 39, 30, 23, 11],
+        [11, 25, 50, 53, 15],
+        [19, 27, 29, 37, 27],
+        [19, 13, 30, 13, 19],
+      ];
+      console.log(solution(arr));
+      */
+    </script>
+  </body>
+  </html>
+
+
+  /*
+  
